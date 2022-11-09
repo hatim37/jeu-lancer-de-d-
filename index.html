@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jeu du lancer de dé</title>
+       
+    <!-- Start : Import typo google font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet"> 
+    <!-- End : Import typo google font-->    
+
+    <link rel="stylesheet" href="styles.css">
+    
+</head>
+<body>
+
+    <main>
+        <section class="section">
+
+<!--Start : section player1 -->
+            <div class="player1 border"  id="player1" >
+
+                <div class="container_player">
+                    <p class="player_text" id="title_player1">PLAYERS 1</p>
+                    <div class="pastille_joueur1" id="pastille_joueur1"></div>
+                </div>
+
+                <div class="global" type="number"  value="">
+                    <span id="global-player1" type="text" value="0">0</span>
+                </div>
+
+                <div class="round">
+                    <p>CURRENT</p>
+                    <span  type="text" id="round-player1" value="0">0</span>
+                </div>
+
+            </div>
+<!--End : section player1 -->
+
+<!--Start : section player2 -->
+            <div class="player2 border" id="player2">
+
+                <div class="container_player">
+                    <p class="player_text" id="title_player2">PLAYERS 2</p>  
+                    <div class="pastille_joueur2" id="pastille_joueur2"></div>
+                </div>
+
+                <div type="text" class="global">
+                    <span id="global-player2" type="text" value="0">0</span>
+                </div>
+
+                <div class="round">
+                    <p>CURRENT</p>
+                    <span  type="text" id="round-player2" value="0">0</span>
+                </div>
+
+            </div>
+<!--End : section player2 -->
+
+<!--Start : section menu -->
+
+            <div type="button" class="newgame" value="NEW GAME" id="newgame">
+                <img src="images/newgame.png" />
+                <p>NEW GAME</p>
+            </div>
+        
+            <div>
+                <img src="" id="image-dice" class="dice"/>
+            </div>
+
+            <div type="button" class="rolldice" value="ROLL DICE" id="rolldice">
+                <img src="images/rolldice.png"/>
+                <p>ROLL DICE</p>
+            </div>
+
+            <div type="button" class="hold" id="hold" value="HOLD">
+                <img src="images/hold.png" />
+                <p>HOLD</p>
+            </div>
+<!--End : section menu -->
+        </section>
+
+<!--Start : modal -->
+        <button class="trigger"></button>
+        <div class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h2 id="name_winner"></h2>
+            </div>
+        </div>
+<!--End : modal -->
+    </main>
+
+    <script type="text/javascript" src="script.js"></script>
+    <script type="text/javascript" src="confetti.js"></script>
+   
+</body>
+</html>
