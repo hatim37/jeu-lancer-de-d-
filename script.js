@@ -26,6 +26,8 @@ var buttonHold = document.getElementById('hold')
 
 /* ................../ les fonctions /...................... */
 
+
+
 // fonction pour incrementer score apres lancer de Dé
 var score=0;
 function addScore(increment) {
@@ -68,8 +70,18 @@ var image = function (resultat){
 }
 
 // function nouvelle partie
-function newgame(){
-    location.reload();
+function newgame(){ 
+roundPlayer1.value = 0;
+roundPlayer1.innerText = 0;
+roundPlayer2.value = 0;
+roundPlayer2.innerText = 0;
+globalPlayer1.value = 0;
+globalPlayer1.innerText = 0;
+globalPlayer2.value = 0;
+globalPlayer2.innerText = 0;
+joueur = 0;
+score = 0;
+couleurJoueur()
 }
 
 //confetti gagnant start
@@ -83,22 +95,19 @@ const startConfetti = () => {
 //confetti stop
 const stopConfetti = () => {
     setTimeout(function(){
-        confetti.stop()
+        confetti.stop();
     },3000)
 }
 
 // fonction pour verifier et afficher le nom du gagnant
 function winner(score, message) {
 
-   if (score == 10 || score > 10){
+   if (score == 100 || score > 100){
         //declancher animation + modal message
         joueurWin.innerText = message
         toggleModal()
         startConfetti();
         stopConfetti();
-        //verouiller click rolldice et hold pour figé la partie
-        buttonRolldice.style.pointerEvents = "none";
-        buttonHold.style.pointerEvents = "none";
     }
 }
 
@@ -107,6 +116,8 @@ function winner(score, message) {
 function animationStart() {
     var element = document.getElementById("image-dice");
     element.classList.add("animation");
+    buttonRolldice.style.pointerEvents = "none";
+    buttonHold.style.pointerEvents = "none";
 }
 
 
@@ -114,7 +125,10 @@ function animationStart() {
 function animationEnd() {
     setTimeout(() => {
     var element = document.getElementById("image-dice");
-    element.classList.remove("animation");},1500)
+    element.classList.remove("animation");
+    buttonRolldice.style.pointerEvents = "auto";
+    buttonHold.style.pointerEvents = "auto";
+},1500)
 }
 
 
@@ -138,19 +152,26 @@ function toggleModal() {
 
 function windowOnClick(event) {
     if (event.target === modal) {
-        toggleModal();
+        toggleModal(); 
     }
 }
+
 
 trigger.addEventListener("click", toggleModal);
 closeButton.addEventListener("click", toggleModal);
 window.addEventListener("click", windowOnClick);
+closeButton.addEventListener("click", function(){
+    newgame();
+});
+
 
 
 
 
 
 /* ......../ fonction en application /.......... */
+
+
 
 
 //afficher la couleur du joueur de depart
@@ -171,13 +192,9 @@ addEventListener('click', function(){
     animationStart()
     animationEnd()
 
-});
-
-
-
-var element = document.getElementById("image-dice");
-element.addEventListener("animationend", function(){
-   
+// timer pour attendre la fin de l'aniamtion et lancer les opérations
+setTimeout(() => {
+    
     //afficher la couleur du joueur
     couleurJoueur()
 
@@ -193,9 +210,10 @@ element.addEventListener("animationend", function(){
     // verifier quel est le joueur est le player1
     if (joueur == 0){
 
-        // afficher le score dans current player1
+        // afficher le score dans current player1 + minitueur pour attendre l'affiche image du dé
+        setTimeout(() =>{
         roundPlayer1.value = current;
-        roundPlayer1.innerText = current
+        roundPlayer1.innerText = current},300)
     
         //si resultat du lancer = 1
         if ( numeroDe == 1) {
@@ -214,9 +232,10 @@ element.addEventListener("animationend", function(){
     // verifier quel est le joueur est le player2       
     }else if (joueur > 0){
         
-        // afficher le score dans current player2
+        // afficher le score dans current player2 + minitueur pour attendre l'affiche image du dé
+        setTimeout(() =>{
         roundPlayer2.value = current
-        roundPlayer2.innerText = current
+        roundPlayer2.innerText = current},300)
         
         if ( numeroDe == 1) {
         //réinitialiser round + score + décrementer joueur pour changer player
@@ -230,7 +249,8 @@ element.addEventListener("animationend", function(){
         couleurJoueur()
         
         }
-    }   
+    }    
+}, 1500);
 })
     
 
@@ -267,7 +287,7 @@ addEventListener('click', function(){
         image(0)
 
         //verifier score gagnant
-        winner(sumvalue, "le player 1 gagne !")
+        winner(sumvalue, "le players 1 gagne !")
 
     
 
@@ -298,7 +318,7 @@ addEventListener('click', function(){
         image(0)
 
         //verifier score gagnant
-        winner(sumvalue2, "le player 2 gagne !")
+        winner(sumvalue2, "le players 2 gagne !")
     }
    });
    

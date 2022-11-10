@@ -20,8 +20,8 @@ body {
 
 .section {
     position: relative;
-    height: 98vh;
-    margin: 5px;
+    height: 95vh;
+    margin: 10px;
     background-color: white;
     display: block; 
 }
@@ -64,6 +64,7 @@ body {
     margin-top: 25%;
     font-size: 1.5rem;
     margin-left: 15px;
+    
 }
 
 
@@ -77,8 +78,8 @@ body {
 
 
 .newgame, .rolldice, .hold {
-    color: black;/****/
-    font-size: 1rem;/***/
+    color: black;
+    font-size: 1rem;
     font-weight: 400;
     border: none;
     background: none;
@@ -94,15 +95,20 @@ body {
 
 .rolldice img, .hold img, .newgame img {
     height:70%;
-    margin-right: 10px;
+    margin-right: 5px;
 }
 
 .container_player{
-    height: 40%;
+    height: 30%;
+}
+
+.player2 .container_player {
+
+height: 40%;
 }
 
 .global {
-    padding-left: 10%;
+    padding-left: 15%;
     align-items: center;
     text-align: start;
     font-size: 5rem;
@@ -111,19 +117,24 @@ body {
     color: #e50303;
     font-weight: 300;
     height: 60%;
+    margin-top: 5%;
 }
 
 .round {
-    right: 10px;
-    width: 100px;
-    height: 75px;
-    top: 45%;
+    right: 30px;
+    width: 75px;
+    height: 70px;
+    top: 50%;
     bottom: 20%;
     background: #e50303;
     color: white;
     text-align: center;
     font-size: 1.6rem;
 }
+
+.round-player1  {
+    top: 40%;
+} 
 
 .round p {
     color: black;
@@ -138,9 +149,10 @@ body {
 }
 
 .rolldice {
+   
     top: 48%; 
     right: 10px;
-    
+   min-width: 110px;
 }
 
 .hold {
@@ -157,9 +169,9 @@ body {
     right: 0;
     border-radius: 10px;
     background-color: white;
-    top: 45%;/****/
-    width: 80px;/****/
-    height: 80px;/****/
+    top: 45%;
+    width: 80px;
+    height: 80px;
     -webkit-box-shadow: -1px 1px 12px 5px rgba(0,0,0,0.3); 
     box-shadow: -1px 1px 12px 5px rgba(0,0,0,0.3);
 }
@@ -292,6 +304,8 @@ body {
     .newgame, .rolldice, .hold {
         color: gray;
         font-size: 1.5rem;
+        height: 5%;
+        align-items: center;
     } 
 
     .global {
@@ -303,11 +317,21 @@ body {
         margin-right: auto;
     }
 
+    .rolldice img, .hold img, .newgame img {
+       
+        margin-right: 10px;
+    }
+
     .container_player{
         justify-content: center;
         align-items: flex-end;
         height: auto;
     }
+
+    .player2 .container_player {
+
+        height: auto;
+        }
 
     .round {
         right: none;
@@ -324,7 +348,7 @@ body {
     .rolldice {
         top: 70%; 
         right: none;
-
+        min-width: none;
     }
 
     .hold {
@@ -333,8 +357,6 @@ body {
         left: none;
         min-width: 6%;
     }
-
-
 
     /* ......../ lancer de dé /.......... */
 
