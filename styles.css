@@ -20,7 +20,7 @@ body {
 
 .section {
     position: relative;
-    height: 95vh;
+    height: 94vh;
     margin: 10px;
     background-color: white;
     display: block; 
@@ -90,7 +90,6 @@ body {
     display: flex;
     justify-content: center;
     min-width: 10%;
-    
 } 
 
 .rolldice img, .hold img, .newgame img {
@@ -103,8 +102,7 @@ body {
 }
 
 .player2 .container_player {
-
-height: 40%;
+    height: 40%;
 }
 
 .global {
@@ -112,6 +110,7 @@ height: 40%;
     align-items: center;
     text-align: start;
     font-size: 5rem;
+    pointer-events: auto;
     width: 100%;
     height: 120px;
     color: #e50303;

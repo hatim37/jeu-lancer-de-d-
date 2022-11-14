@@ -1,11 +1,12 @@
 
 /* ................./ les variables /................... */
 
-
 // variable pré-établie
 let numeroDe = 0;
 
 var joueur = 0;
+
+var score=0;
 
 var roundPlayer1= document.getElementById("round-player1")
 roundPlayer1.value = 0;
@@ -19,9 +20,8 @@ globalPlayer1.value = 0;
 var globalPlayer2 = document.getElementById('global-player2')
 globalPlayer2.value = 0;
 
-var buttonRolldice = document.getElementById('rolldice')
+var element = document.getElementById("image-dice")
 
-var buttonHold = document.getElementById('hold')
 
 
 /* ................../ les fonctions /...................... */
@@ -29,10 +29,10 @@ var buttonHold = document.getElementById('hold')
 
 
 // fonction pour incrementer score apres lancer de Dé
-var score=0;
+
 function addScore(increment) {
-score+=increment;
-return score;
+    score+=increment;
+    return score;
 };
 
 //fonction pour faire apparaitre la couleur du joureur en cours
@@ -48,14 +48,12 @@ function couleurJoueur(){
         let pastilleJoueur2 = document.getElementById("pastille_joueur2");
       pastilleJoueur2.style.background = "none";
        
-
     }else if(joueur > 0){
 
         // afficher style.css joueur2
         let pastilleJoueur2 = document.getElementById("pastille_joueur2");
         pastilleJoueur2.style.background = "red";
    
-
         // masquer style.css du joueur1
         let pastilleJoueur1 = document.getElementById("pastille_joueur1");
         pastilleJoueur1.style.background = "none";
@@ -69,18 +67,18 @@ var image = function (resultat){
     .src = "images/dé-" + resultat + ".jpg"
 }
 
-// function nouvelle partie
+// function nouvelle partie +fin de partie
 function newgame(){ 
-roundPlayer1.value = 0;
-roundPlayer1.innerText = 0;
-roundPlayer2.value = 0;
-roundPlayer2.innerText = 0;
-globalPlayer1.value = 0;
-globalPlayer1.innerText = 0;
-globalPlayer2.value = 0;
-globalPlayer2.innerText = 0;
-joueur = 0;
-score = 0;
+    roundPlayer1.value = 0;
+    roundPlayer1.innerText = 0;
+    roundPlayer2.value = 0;
+    roundPlayer2.innerText = 0;
+    globalPlayer1.value = 0;
+    globalPlayer1.innerText = 0;
+    globalPlayer2.value = 0;
+    globalPlayer2.innerText = 0;
+    joueur = 0;
+    score = 0;
 couleurJoueur()
 }
 
@@ -88,10 +86,9 @@ couleurJoueur()
 const startConfetti = () => {
     setTimeout(function(){
         confetti.start();
-        
-        
     })
 }
+
 //confetti stop
 const stopConfetti = () => {
     setTimeout(function(){
@@ -115,22 +112,28 @@ function winner(score, message) {
 // fonction pour activer animation du lancer de dé
 function animationStart() {
     var element = document.getElementById("image-dice");
-    element.classList.add("animation");
-    buttonRolldice.style.pointerEvents = "none";
-    buttonHold.style.pointerEvents = "none";
+    element.classList.add("animation"); 
+    
 }
 
 
 // fonction pour désactiver animation du lancer de dé
 function animationEnd() {
     setTimeout(() => {
-    var element = document.getElementById("image-dice");
-    element.classList.remove("animation");
-    buttonRolldice.style.pointerEvents = "auto";
-    buttonHold.style.pointerEvents = "auto";
-},1500)
+      element.classList.remove("animation");
+     
+    },1500)
 }
 
+//fonction pour verrouiller les boutons hold et rolldice
+function closeClick(){
+    document.getElementById('rolldice').style.pointerEvents = "none";
+    document.getElementById('hold').style.pointerEvents = "none";
+    setTimeout(() => {
+        document.getElementById('rolldice').style.pointerEvents = "auto"; 
+        document.getElementById('hold').style.pointerEvents = "auto";
+    },1500)
+}
 
  // fonction nouvelle partie click newgame
  document.getElementById("newgame").
@@ -167,8 +170,6 @@ closeButton.addEventListener("click", function(){
 
 
 
-
-
 /* ......../ fonction en application /.......... */
 
 
@@ -185,15 +186,19 @@ image(numeroDe)
 // fonction lors du click sur rolldice
 document.getElementById("rolldice").
 addEventListener('click', function(){
-
+   
+    //verrouiller click rolldice+hold en attente que l'animation ce termine
+    closeClick()
     //afficher image a zero avant animation
     image(0);
     // animation du lancer du dé
     animationStart()
     animationEnd()
 
+
+
 // timer pour attendre la fin de l'aniamtion et lancer les opérations
-setTimeout(() => {
+setTimeout(() =>{
     
     //afficher la couleur du joueur
     couleurJoueur()
@@ -206,14 +211,14 @@ setTimeout(() => {
     //appel fonction pour incrémenter le score
     current = addScore(numeroDe)
    
-     
+    
     // verifier quel est le joueur est le player1
     if (joueur == 0){
 
-        // afficher le score dans current player1 + minitueur pour attendre l'affiche image du dé
-        setTimeout(() =>{
+        //si players 1
+        // afficher le score dans current player1
         roundPlayer1.value = current;
-        roundPlayer1.innerText = current},300)
+        roundPlayer1.innerText = current
     
         //si resultat du lancer = 1
         if ( numeroDe == 1) {
@@ -231,11 +236,11 @@ setTimeout(() => {
         
     // verifier quel est le joueur est le player2       
     }else if (joueur > 0){
-        
-        // afficher le score dans current player2 + minitueur pour attendre l'affiche image du dé
-        setTimeout(() =>{
+
+        //si players 2
+        // afficher le score dans current player2
         roundPlayer2.value = current
-        roundPlayer2.innerText = current},300)
+        roundPlayer2.innerText = current
         
         if ( numeroDe == 1) {
         //réinitialiser round + score + décrementer joueur pour changer player
@@ -249,8 +254,8 @@ setTimeout(() => {
         couleurJoueur()
         
         }
-    }    
-}, 1500);
+    } 
+},1500)   
 })
     
 
